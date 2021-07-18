@@ -1,0 +1,11 @@
+app-header {
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  z-index: 999;
+}
+
+.wrap-custom {
+  padding: 60px 60px 20px;
+  min-height: 100%;
+}
