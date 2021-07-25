@@ -61,3 +61,23 @@ export function deleted(message: string, time: number = 5000) {
     `
 }
 } 
+
+export function error(message: string, time: number = 5000) {
+    return {
+    // icon: 'success',
+    imageUrl: '/assets/gifs/cat-error.gif',
+    title: 'Oops! Ocurrio un error!',
+    text: message,
+    showConfirmButton: false,
+    timer: time,
+    width: 600,
+    padding: '3em',
+    background: '#fff',
+    backdrop: `
+    rgba(0,0,123,0.4)
+    url('/assets/gifs/nyan-cat.gif')
+    left top
+    no-repeat
+    `
+}
+}
