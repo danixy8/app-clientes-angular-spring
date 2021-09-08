@@ -17,7 +17,7 @@ export function success(message: string, time: number = 5000) {
     no-repeat
     `
 }
-} 
+}
 
 export function confirmAction(message: string) {
     return {
@@ -40,7 +40,7 @@ export function confirmAction(message: string) {
     no-repeat
     `
 }
-} 
+}
 
 export function deleted(message: string, time: number = 5000) {
     return {
@@ -60,7 +60,7 @@ export function deleted(message: string, time: number = 5000) {
     no-repeat
     `
 }
-} 
+}
 
 export function error(message: string, time: number = 5000) {
     return {

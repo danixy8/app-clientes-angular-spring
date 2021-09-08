@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { InjectionToken, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -11,6 +11,9 @@ import { ClienteService } from './clientes/cliente.service';
 import { RouterModule, Routes } from '@angular/router';
 import { FormComponent } from './clientes/form.component';
 import { FormsModule} from '@angular/forms';
+import { registerLocaleData } from '@angular/common';
+import localeEsCl from '@angular/common/locales/es-CL';
+import { LOCALE_ID } from '@angular/core';
 
 const routes: Routes = [
   {path: '', redirectTo: 'clientes', pathMatch: 'full'},
@@ -19,6 +22,8 @@ const routes: Routes = [
   {path: 'clientes/form', component: FormComponent},
   {path: 'clientes/form/:id', component: FormComponent}
 ];
+
+registerLocaleData(localeEsCl, 'es-Cl');
 
 @NgModule({
   declarations: [
@@ -35,7 +40,7 @@ const routes: Routes = [
     FormsModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [ClienteService],
+  providers: [ClienteService, {provide: LOCALE_ID, useValue: 'es-CL' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
