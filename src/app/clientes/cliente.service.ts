@@ -4,7 +4,7 @@ import { Cliente } from './cliente';
 import { CLIENTES } from './clientes.json';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of, pipe, throwError } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { map, catchError, tap } from 'rxjs/operators';
 import swal from 'sweetalert2';
 import { error } from 'src/assets/alerts/alerts';
 import { Router } from '@angular/router';
@@ -19,22 +19,38 @@ export class ClienteService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  getClientes(): Observable <Cliente[]> {
+  getClientes(page: number): Observable <any> {
     // return of(CLIENTES)
     // return this.http.get<Cliente[]>(this.urlEndPoint)
-    return this.http.get(this.urlEndPoint).pipe(
-      map( response => {
-        let clientes = response as Cliente[];
-
-        return clientes
-        // return clientes.map(cliente => {
-        //   cliente.nombre = cliente.nombre.toUpperCase();
+    return this.http.get(this.urlEndPoint + '/page/' + page).pipe(
+      // el orden de los taps importan. en este punto habria que convertir el objeto a un Cliente[] para usar un metodo de arrays
+      tap((response: any) => {
+        console.log('tap 1');
+        // let clientes = response as Cliente[];
+        (response.content as Cliente[]).forEach(cliente => {
+          console.log(cliente.nombre)
+        })
+      }),
+      map( (response: any) => {
+        // return clientes
+        // para devolver el cliente modificado desde el servicio usar este codigo
+        (response.content as Cliente[]).map(cliente => {
+          cliente.nombre = cliente.nombre.toUpperCase();
         //   let datePipe = new DatePipe('es-CL')
         //   cliente.createAt = datePipe.transform(cliente.createAt, 'EEEE dd, MMMM yyyy')
         //   // cliente.createAt = formatDate(cliente.createAt, 'dd/MM/yyyy', 'en-US');
-        //   return cliente
-        // });
-      })
+          return cliente;
+        });
+        return response;
+      }),
+      //en este punto el tapa recoge el return del map que seria un Cliente[]
+      // tap(response => {
+      //   console.log('tap 2')
+      //   (response.content as Cliente[]).forEach(cliente => {
+      //     console.log(cliente.nombre)
+      //   }
+      //   )
+      // }),
     )
   }
 

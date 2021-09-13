@@ -26,7 +26,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let cliente of clientes; let i = index">
-              <td>{{ i+1 }}</td>
+              <td>{{ cliente.id }}</td>
               <td>{{ cliente.nombre }}</td>
               <td>{{ cliente.apellido | uppercase }}</td>
               <td>{{ cliente.email }}</td>
@@ -38,6 +38,6 @@
           </tr>
         </tbody>
     </table>
-
+    <paginator-nav *ngIf="paginador" [paginador]="paginador"></paginator-nav>
   </div>
 </div>
