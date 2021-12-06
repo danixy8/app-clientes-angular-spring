@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {formatDate, DatePipe} from '@angular/common';
 import { Cliente } from './cliente';
 import { CLIENTES } from './clientes.json';
+import {environment} from '../../environments/environment.dev';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of, pipe, throwError } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
@@ -14,7 +15,8 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class ClienteService {
-  private urlEndPoint = 'http://192.168.1.10:8080/api/clientes';
+  private urlHost = environment.apiHost;
+  private urlEndPoint = `${this.urlHost}/api/clientes`;
   private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 
   constructor(private http: HttpClient, private router: Router) { }

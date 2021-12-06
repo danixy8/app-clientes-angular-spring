@@ -47,14 +47,35 @@
                     </div>
                 </div>
             </div>
+
+            <div class="form-group row">
+              <label for="createAt" class="col-form-label col-sm-2">Fecha</label>
+              <div class="col-sm-6">
+                  <input
+                    matInput
+                    [matDatepicker]="miDatapicker"
+                    class="form-control"
+                    [(ngModel)]="cliente.createAt"
+                    name="createAt"
+                    #createAt="ngModel"
+                    style="display:inline; width: 35vh"
+                    >
+                  <mat-datepicker-toggle matSuffix [for]="miDatapicker"></mat-datepicker-toggle>
+                  <mat-datepicker #miDatapicker></mat-datepicker>
+                  <div class="alert alert-danger" *ngIf="createAt.invalid && (createAt.dirty || createAt.touched)">
+
+                  </div>
+              </div>
+            </div>
+
             <div class="form-group row">
                 <div class="col-sm-6">
                     <button *ngIf="!cliente.id else elseBlock"  class="btn btn-primary" role="button" (click)="create()">Crear</button> <!--[disabled]="!clienteForm.form.valid" -->
-                    
+
                     <ng-template #elseBlock>
                         <button class="btn btn-warning" role="button" (click)="updated()" >Editar</button> <!--[disabled]="!clienteForm.form.valid" -->
                     </ng-template>
-                    
+
                 </div>
             </div>
         </form>

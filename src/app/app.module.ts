@@ -16,6 +16,9 @@ import { FormsModule} from '@angular/forms';
 import { registerLocaleData } from '@angular/common';
 import localeEsCl from '@angular/common/locales/es-CL';
 import { LOCALE_ID } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 const routes: Routes = [
   {path: '', redirectTo: 'clientes', pathMatch: 'full'},
@@ -42,7 +45,10 @@ registerLocaleData(localeEsCl, 'es-Cl');
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    BrowserAnimationsModule,
+    MatMomentDateModule,
+    MatDatepickerModule
   ],
   providers: [ClienteService, {provide: LOCALE_ID, useValue: 'es-CL' }],
   bootstrap: [AppComponent]
