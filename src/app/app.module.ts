@@ -19,6 +19,7 @@ import { LOCALE_ID } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { DetalleComponent } from './clientes/detalle/detalle.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'clientes', pathMatch: 'full'},
@@ -26,7 +27,8 @@ const routes: Routes = [
   {path: 'clientes', component: ClientesComponent},
   {path: 'clientes/page/:page', component: ClientesComponent},
   {path: 'clientes/form', component: FormComponent},
-  {path: 'clientes/form/:id', component: FormComponent}
+  {path: 'clientes/form/:id', component: FormComponent},
+  {path: 'clientes/detalle/:id', component: DetalleComponent},
 ];
 
 registerLocaleData(localeEsCl, 'es-Cl');
@@ -39,7 +41,8 @@ registerLocaleData(localeEsCl, 'es-Cl');
     DirectivaComponent,
     ClientesComponent,
     FormComponent,
-    PaginatorComponent
+    PaginatorComponent,
+    DetalleComponent
   ],
   imports: [
     BrowserModule,
