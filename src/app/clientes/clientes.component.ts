@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Cliente } from './cliente';
 import { ClienteService } from './cliente.service';
+import { ModalService } from './detalle/modal.service';
 import swal from 'sweetalert2';
 import { confirmAction, deleted } from 'src/assets/alerts/alerts';
 import {tap} from 'rxjs/operators';
@@ -15,11 +16,13 @@ export class ClientesComponent implements OnInit {
 
   clientes!: Cliente[];
   paginador: any;
+  clienteSeleccionado: Cliente;
 
-  constructor(private clienteService: ClienteService,
-    private activatedRoute: ActivatedRoute) {
-
-  }
+  constructor(
+    private clienteService: ClienteService,
+    private activatedRoute: ActivatedRoute,
+    private modalService: ModalService
+  ){}
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params => {
@@ -59,5 +62,10 @@ export class ClientesComponent implements OnInit {
         swal.fire(deleted(`Has eliminado a ${cliente.nombre}`))
       }
     })
+  }
+
+  abrirModal(cliente: Cliente){
+    this.clienteSeleccionado = cliente;
+    this.modalService.abrirModal();
   }
 }
